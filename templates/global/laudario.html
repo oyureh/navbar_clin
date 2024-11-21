@@ -1,0 +1,351 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navbar</title>
+    <link rel="stylesheet" href="{% static '../static/assets/css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body style="background-color:#1d232f ;">
+<header>
+    <div class="container-center">
+        <section class="header-top">
+            <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="90px" height="80px"></figure>
+            <button id="menuopcoes"><img src="{% static '../static/assets/imgs/justify (1).svg' %}" alt="Clique e abra o menu"  class="img-header" onclick="show()"></button>
+
+            <div class="dropdown">
+              <button style="background-color:#585858;" class="btn btn-secondary dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="img-dropdown" src="{% static '../static/assets/imgs/fotopadraoperfil.png' %}" alt="sua foto de perfil" width="30" height="30">
+                Perfil médico
+              </button>
+              <ul style="background-color:#585858 ;" class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+        </section>
+
+        <section id="menu-bottom">
+          
+            <section class="responsive-container">
+              <select id="select-modalidade" onchange="filtrarTabela()">
+                <option value="" disabled selected>Selecione a modalidade</option>
+                <option value="Raio-X">Raio-X</option>
+                <option value="Ressonância">Ressonância</option>
+                <option value="Ultrassonografia">Ultrassonografia</option>
+                <option value="Tomografia">Tomografia</option>
+                <option value=""></option>
+              </select>
+              <select id="select-unidade" onchange="filtrarTabela()">
+                  <option value="" disabled selected>Selecione a unidade</option>
+                  <option value="Hospital Central">Hospital Central</option>
+                  <option value="Hospital Norte">Hospital Norte</option>
+                  <option value="Hospital Sul">Hospital Sul</option>
+                  <option value=""></option>
+              </select>
+            
+              <div class="dropdown">
+                <button class="btn filter-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtro data
+                </button>
+                <ul class="dropdown-menu filter-dropdown">
+                    <li><input class="dropdown-item filter-input" type="date" id="startDate"></li>
+                    <li><input class="dropdown-item filter-input" type="date" id="endDate"></li>
+                    <li><button class="dropdown-item filter-button-small" onclick="filtrarPorData()">Filtrar</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeHoje()">Mostrar Dados de Hoje</button></li>
+                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeOntem()">Mostrar Dados de Ontem</button></li>
+                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeTresDiasAtras()">Mostrar Dados de 3 Dias Atrás</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item filter-button-small" onclick="limparFiltros()">Limpar Filtros</button></li>
+                </ul>
+            </div>
+            
+            </section>
+
+              <section class="responsive-containerB">
+                <input type="number" id="linhas" min="1" oninput="mostrarLinhas()" placeholder="linhas a exibir"/>
+                <section class="search-box">
+                    <input id="input-busca" type="text"  placeholder="Pesquisar" >
+                    <img  class="search-btn" src="{% static '../static/assets/imgs/lupa.svg' %}" alt="lupa" width="30px" height="30px">
+                </section>
+              </section>
+        </section>    
+    </div>
+</header>
+<main>
+      <section id="container-table"> 
+        <section class="container-checkbox">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Laudos letivos
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Laudos urgentes
+                </label>
+              </div>
+              <div class="form-check">
+                <input onclick="limparFiltros()" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Limpar filtros
+                </label>
+              </div>
+        </section>
+        <table id="tabela">
+           
+          <thead>
+            <tr>
+              <th>Data do Exame</th>
+              <th>Nome do Paciente</th>
+              <th>ID do Paciente</th>
+              <th>Modalidade do Exame</th>
+              <th>Descrição do Exame</th>
+              <th>Unidade do Hospital</th>
+              <th>horario</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-dados">
+            <tr>
+              <td>21/11/2024 </td>
+              <td>Patrícia Alves</td>
+              <td>77889</td>
+              <td>Ultrassonografia</td>
+              <td>Ultrassom obstétrico</td>
+              <td>Hospital Central</td>
+              <td>14:20</td>
+          </tr>
+            <tr>
+              <td>18/11/2024 </td>
+              <td>Pedro Santos</td>
+              <td>54321</td>
+              <td>Raio-X</td>
+              <td>Ultrassom do abdômen</td>
+              <td>Hospital Central</td>
+              <td>08:30</td>
+          </tr>
+          <tr>
+              <td>17/11/2024 </td>
+              <td>Pedro Santos</td>
+              <td>54321</td>
+              <td>Raio-X</td>
+              <td>Ultrassom do abdômen</td>
+              <td>Hospital Central</td>
+              <td>10:15</td>
+          </tr>
+          <tr>
+              <td>15/11/2024 </td>
+              <td>Pedro Santos</td>
+              <td>54321</td>
+              <td>Raio-X</td>
+              <td>Ultrassom do abdômen</td>
+              <td>Hospital Central</td>
+              <td>14:45</td>
+          </tr>
+          <tr>
+              <td>13/11/2024 </td>
+              <td>João Silva</td>
+              <td>12345</td>
+              <td>Raio-X</td>
+              <td>Raio-X do tórax</td>
+              <td>Hospital Central</td>
+              <td>09:00</td>
+          </tr>
+          <tr>
+              <td>12/11/2024</td>
+              <td>João Silva</td>
+              <td>12345</td>
+              <td>Raio-X</td>
+              <td>Raio-X do tórax</td>
+              <td>Hospital Central</td>
+              <td> 11:20</td>
+          </tr>
+          <tr>
+              <td>10/11/2024</td>
+              <td>João Silva</td>
+              <td>12345</td>
+              <td>Raio-X</td>
+              <td>Raio-X do tórax</td>
+              <td>Hospital Central</td>
+              <td> 16:00</td>
+          </tr>
+          <tr>
+              <td>01/11/2024 07:45</td>
+              <td>João Silva</td>
+              <td>12345</td>
+              <td>Raio-X</td>
+              <td>Raio-X do tórax</td>
+              <td>Hospital Central</td>
+              <td> 07:45</td>
+          </tr>
+          <tr>
+              <td>02/11/2024 </td>
+              <td>Maria Souza</td>
+              <td>67890</td>
+              <td>Ressonância</td>
+              <td>Ressonância magnética do cérebro</td>
+              <td>Hospital Norte</td>
+              <td>13:10</td>
+          </tr>
+          <tr>
+              <td>03/11/2024</td>
+              <td>Pedro Santos</td>
+              <td>54321</td>
+              <td>Ultrassonografia</td>
+              <td>Ultrassom do abdômen</td>
+              <td>Hospital Sul</td>
+              <td> 15:25</td>
+          </tr>
+          <tr>
+              <td>04/11/2024 </td>
+              <td>Lucas Pereira</td>
+              <td>11223</td>
+              <td>Tomografia</td>
+              <td>Tomografia do crânio</td>
+              <td>Hospital Central</td>
+              <td>09:30</td>
+          </tr>
+          <tr>
+              <td>05/11/2024</td>
+              <td>Fernanda Lima</td>
+              <td>33445</td>
+              <td>Raio-X</td>
+              <td>Raio-X da coluna</td>
+              <td>Hospital Norte</td>
+              <td> 12:50</td>
+          </tr>
+          <tr>
+              <td>06/11/2024</td>
+              <td>André Carvalho</td>
+              <td>55667</td>
+              <td>Ressonância</td>
+              <td>Ressonância do joelho</td>
+              <td>Hospital Sul</td>
+              <td> 08:40</td>
+          </tr>
+          <tr>
+              <td>07/11/2024 </td>
+              <td>Patrícia Alves</td>
+              <td>77889</td>
+              <td>Ultrassonografia</td>
+              <td>Ultrassom obstétrico</td>
+              <td>Hospital Central</td>
+              <td>14:20</td>
+          </tr>
+          <tr>
+              <td>08/11/2024 </td>
+              <td>Rafael Gonçalves</td>
+              <td>99001</td>
+              <td>Tomografia</td>
+              <td>Tomografia do tórax</td>
+              <td>Hospital Norte</td>
+              <td>10:30</td>
+          </tr>
+          <tr>
+              <td>09/11/2024 </td>
+              <td>Bianca Martins</td>
+              <td>22334</td>
+              <td>Raio-X</td>
+              <td>Raio-X do ombro</td>
+              <td>Hospital Sul</td>
+              <td>17:10</td>
+          </tr>
+          <tr>
+              <td>10/11/2024 </td>
+              <td>Henrique Souza</td>
+              <td>55678</td>
+              <td>Ressonância</td>
+              <td>Ressonância do abdômen</td>
+              <td>Hospital Central</td>
+              <td>18:25</td>
+          </tr>
+          <tr>
+              <td>11/11/2024</td>
+              <td>Mariana Torres</td>
+              <td>88900</td>
+              <td>Ultrassonografia</td>
+              <td>Ultrassom das mamas</td>
+              <td>Hospital Norte</td>
+              <td> 09:15</td>
+          </tr>
+          <tr>
+              <td>12/11/2024</td>
+              <td>Carlos Santos</td>
+              <td>22334</td>
+              <td>Tomografia</td>
+              <td>Tomografia do abdômen</td>
+              <td>Hospital Sul</td>
+              <td> 13:35</td>
+          </tr>
+          <tr>
+              <td>13/11/2024 </td>
+              <td>Camila Rocha</td>
+              <td>33445</td>
+              <td>Raio-X</td>
+              <td>Raio-X da mão</td>
+              <td>Hospital Central</td>
+              <td>07:50</td>
+          </tr>
+          <tr>
+              <td>14/11/2024 </td>
+              <td>Gabriel Mendes</td>
+              <td>55678</td>
+              <td>Ressonância</td>
+              <td>Ressonância do tórax</td>
+              <td>Hospital Norte</td>
+              <td>15:45</td>
+          </tr>
+          <tr>
+              <td>15/11/2024 </td>
+              <td>Julia Freitas</td>
+              <td>77890</td>
+              <td>Ultrassonografia</td>
+              <td>Ultrassom do coração</td>
+              <td>Hospital Sul</td>
+              <td>08:25</td>
+          </tr>
+          <tr>
+              <td>16/11/2024 </td>
+              <td>Roberto Nunes</td>
+              <td>99001</td>
+              <td>Tomografia</td>
+              <td>Tomografia da coluna</td>
+              <td>Hospital Central</td>
+              <td>10:50</td>
+          </tr>
+          <tr>
+              <td>17/11/2024</td>
+              <td>Ana Oliveira</td>
+              <td>11223</td>
+              <td>Raio-X</td>
+              <td>Raio-X do pé</td>
+              <td>Hospital Norte</td>
+              <td> 09:40</td>
+          </tr>
+          <tr>
+              <td>18/11/2024 </td>
+              <td>Victor Reis</td>
+              <td>33445</td>
+              <td>Ressonância</td>
+              <td>Ressonância da coluna cervical</td>
+              <td>Hospital Sul</td>
+              <td>14:00</td>
+          </tr>                 
+          </tbody>
+        </table>       
+      </section>
+</main>
+<footer>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="{% static '../static/assets/js/provisorio.js' %}" defer></script>
+</body>
+</html>

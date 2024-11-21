@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtro de Data na Tabela</title>
+</head>
+<body>
+
+    <!-- Campos de entrada para selecionar o intervalo de datas -->
+    <label for="startDate">Data de Início:</label>
+    <input type="date" id="startDate">
+    
+    <label for="endDate">Data de Fim:</label>
+    <input type="date" id="endDate">
+    
+    <button onclick="filtrarPorData()">Filtrar</button>
+    
+    <!-- Tabela com dados a serem filtrados -->
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01/10/2023</td>
+                <td>Evento A</td>
+            </tr>
+            <tr>
+                <td>15/10/2023</td>
+                <td>Evento B</td>
+            </tr>
+            <tr>
+                <td>01/11/2023</td>
+                <td>Evento C</td>
+            </tr>
+            <tr>
+                <td>05/12/2023</td>
+                <td>Evento D</td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+
+    <script>
+        function filtrarPorData() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const tabela = document.getElementById('tabela');
+            const linha = tabela.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            if (!startDate || !endDate || startDate > endDate) {
+                alert("Por favor, insira um intervalo de datas válido.");
+                return;
+            }
+            function converterDataBrasileira(dataString) {
+                const [dia, mes, ano] = dataString.split('/');
+                return new Date(`${ano}-${mes}-${dia}`); 
+            }
+
+            for (let i = 0; i < linha.length; i++) {
+                const dataLinhaTexto = linha[i].getElementsByTagName('td')[0].innerText;
+                const dataLinha = converterDataBrasileira(dataLinhaTexto); 
+
+                if (dataLinha >= startDate && dataLinha <= endDate) {
+                    linha[i].style.display = ''; 
+                } else {
+                    linha[i].style.display = 'none'; 
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
