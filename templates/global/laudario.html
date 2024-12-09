@@ -5,347 +5,283 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>navbar</title>
-    <link rel="stylesheet" href="{% static '../static/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="background-color:#1d232f ;">
+<body>
 <header>
+
     <div class="container-center">
         <section class="header-top">
-            <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="90px" height="80px"></figure>
-            <button id="menuopcoes"><img src="{% static '../static/assets/imgs/justify (1).svg' %}" alt="Clique e abra o menu"  class="img-header" onclick="show()"></button>
+            <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="65px" height="55px"></figure>
+            <button id="menuopcoes"><img src="{% static '../static/assets/imgs/justify (1).svg' %}" alt="Clique e abra o menu"  class="img-header" ></button>
 
             <div class="dropdown">
-              <button style="background-color:#585858;" class="btn btn-secondary dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-dropdown" src="{% static '../static/assets/imgs/fotopadraoperfil.png' %}" alt="sua foto de perfil" width="30" height="30">
-                Perfil médico
-              </button>
-              <ul style="background-color:#585858 ;" class="dropdown-menu dropdown-menu-dark">
+              <a class="btn btn-drop btn-sm btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown link
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </div>
+
         </section>
 
         <section id="menu-bottom">
-          
-            <section class="responsive-container">
-              <select id="select-modalidade" onchange="filtrarTabela()">
-                <option value="" disabled selected>Selecione a modalidade</option>
+
+          <section class="search-box">
+            <input id="input-busca" type="text"  placeholder="Pesquisar" >
+            <img  class="search-btn" src="{% static '../static/assets/imgs/lupa.svg' %}" alt="lupa" width="30px" height="30px">
+          </section>      
+
+          <section>
+              <section class="container-dates">
+                <section class="dates">
+                  <label for="data inicio">Data início</label>
+                  <input class="select" type="date" name="data inicio" id="">
+                </section>
+                <section class="dates">
+                  <label for="data fim">Data fim</label>
+                  <input  class="select" type="date" name="data fim" id="">
+                </section>
+              </section>
+
+              <select class="select" id="select-modalidade" onchange="filtrarTabela()">
+                <option value="" disabled selected>Modalidade</option>
                 <option value="Raio-X">Raio-X</option>
                 <option value="Ressonância">Ressonância</option>
                 <option value="Ultrassonografia">Ultrassonografia</option>
                 <option value="Tomografia">Tomografia</option>
                 <option value=""></option>
               </select>
-              <select id="select-unidade" onchange="filtrarTabela()">
-                  <option value="" disabled selected>Selecione a unidade</option>
+
+              <select class="select" id="select-unidade" onchange="filtrarTabela()">
+                  <option value="" disabled selected>Instituição</option>
                   <option value="Hospital Central">Hospital Central</option>
                   <option value="Hospital Norte">Hospital Norte</option>
                   <option value="Hospital Sul">Hospital Sul</option>
                   <option value=""></option>
               </select>
             
-              <div class="dropdown">
-                <button class="btn filter-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtro data
-                </button>
-                <ul class="dropdown-menu filter-dropdown">
-                    <li><input class="dropdown-item filter-input" type="date" id="startDate"></li>
-                    <li><input class="dropdown-item filter-input" type="date" id="endDate"></li>
-                    <li><button class="dropdown-item filter-button-small" onclick="filtrarPorData()">Filtrar</button></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeHoje()">Mostrar Dados de Hoje</button></li>
-                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeOntem()">Mostrar Dados de Ontem</button></li>
-                    <li><button class="dropdown-item filter-button-small" onclick="mostrarDadosDeTresDiasAtras()">Mostrar Dados de 3 Dias Atrás</button></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><button class="dropdown-item filter-button-small" onclick="limparFiltros()">Limpar Filtros</button></li>
-                </ul>
-            </div>
-            
-            </section>
+                <input class="select" type="number" id="linhas" min="1" oninput="mostrarLinhas()" placeholder="Laudos a exibir"/>
 
-              <section class="responsive-containerB">
-                <input type="number" id="linhas" min="1" oninput="mostrarLinhas()" placeholder="linhas a exibir"/>
-                <section class="search-box">
-                    <input id="input-busca" type="text"  placeholder="Pesquisar" >
-                    <img  class="search-btn" src="{% static '../static/assets/imgs/lupa.svg' %}" alt="lupa" width="30px" height="30px">
-                </section>
-              </section>
-        </section>    
+                <select class="select" name="" id="">
+                  <option value=""  disabled selected>Situação do exame</option>
+                  <option value="Urgente">Urgente</option>
+                  <option value="Letivo">Letivo</option>
+                  <option value=""></option>
+                </select>
+                
+                <select class="select" name="" id="">
+                  <option value="" disabled selected>Médico (todos)</option>
+                  <option value=""></option>
+                </select>
+
+                <select class="select" name="" id="">
+                  <option value=""  disabled selected>Situação do laudo</option>
+                  <option value="Urgente">Urgente</option>
+                  <option value="Letivo">Letivo</option>
+                  <option value=""></option>
+                </select>
+
+                <select class="select" name="" id="">
+                  <option value=""  disabled selected>Selecionar laudos</option>
+                  <option value="">Ultimos 10 Laudos</option>
+                  <option value="">Ultimos 30 Laudos</option>
+                  <option value="">Ultimos 50 Laudos</option>
+                  <option value="">Ultimos 100 Laudos</option>
+                  <option value=""></option>
+                </select>
+
+                <button type="button" class="btn  btn-sm btn-danger">Pesquisar   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg></button>
+                <button type="button" class="btn  btn-sm btn-danger">Limpar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg></button>
+
+          </section>      
+        </section>  
     </div>
 </header>
+<br>
+<br>
 <main>
-      <section id="container-table"> 
-        <section class="container-checkbox">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Laudos letivos
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Laudos urgentes
-                </label>
-              </div>
-              <div class="form-check">
-                <input onclick="limparFiltros()" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Limpar filtros
-                </label>
-              </div>
-        </section>
+    <section class="table-responsive">
         <table id="tabela">
            
           <thead>
             <tr>
+              <th>Paciente (Sexo) & (Idade)</th>
               <th>Data do Exame</th>
-              <th>Nome do Paciente</th>
-              <th>ID do Paciente</th>
+              <th>Horario</th> 
               <th>Modalidade do Exame</th>
               <th>Descrição do Exame</th>
-              <th>Unidade do Hospital</th>
-              <th>horario</th>
+              <th>Situação </th>
+              <TH> Especilidade </TH>
+              <th>Médico do laudo</th>
+              <th>Instituição</th>
+              <th> Laudo </th>
             </tr>
           </thead>
           <tbody id="tabela-dados">
             <tr>
-              <td>21/11/2024 </td>
-              <td>Patrícia Alves</td>
-              <td>77889</td>
-              <td>Ultrassonografia</td>
-              <td>Ultrassom obstétrico</td>
+              <td>João Silva (M) & (45)</td>
+              <td>05/12/2024</td>
+              <td>14:30</td>
+              <td>Ressonância Magnética</td>
+              <td id="description-table">  
+                <p>Ressonância Magnética de Joelho Direitol</p>
+                
+                <button class="btn-table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15"/>
+                  </svg>
+                </button>
+              </td>
+              <td id="situacao-table">
+                <label for="btn-situacao">Assinado</label>
+                <input type="button" name="btn-situacao" class="btn-situacao" value="">
+              </td>
+              <td>Ortopedia</td>
+              <td>Dr. Pedro Almeida</td>
               <td>Hospital Central</td>
-              <td>14:20</td>
-          </tr>
+              <td> 
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
             <tr>
-              <td>18/11/2024 </td>
-              <td>Pedro Santos</td>
-              <td>54321</td>
-              <td>Raio-X</td>
-              <td>Ultrassom do abdômen</td>
-              <td>Hospital Central</td>
-              <td>08:30</td>
-          </tr>
-          <tr>
-              <td>17/11/2024 </td>
-              <td>Pedro Santos</td>
-              <td>54321</td>
-              <td>Raio-X</td>
-              <td>Ultrassom do abdômen</td>
-              <td>Hospital Central</td>
-              <td>10:15</td>
-          </tr>
-          <tr>
-              <td>15/11/2024 </td>
-              <td>Pedro Santos</td>
-              <td>54321</td>
-              <td>Raio-X</td>
-              <td>Ultrassom do abdômen</td>
-              <td>Hospital Central</td>
-              <td>14:45</td>
-          </tr>
-          <tr>
-              <td>13/11/2024 </td>
-              <td>João Silva</td>
-              <td>12345</td>
-              <td>Raio-X</td>
-              <td>Raio-X do tórax</td>
-              <td>Hospital Central</td>
+              <td>Maria Oliveira (F) & (34)</td>
+              <td>03/12/2024</td>
+              <td>10:00</td>
+              <td>Ultrassonografia</td>
+              <td id="description-table">  
+                <p>Ultrassom Abdominal</p>
+
+                <button class="btn-table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15"/>
+                  </svg>
+                </button>
+              </td>
+              <td>Pendente</td>
+              <td>Gastroenterologia</td>
+              <td>Dr. Lucas Mendes</td>
+              <td>Clínica Vida</td>
+              <td> 
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Carlos Ferreira (M) & (62)</td>
+              <td>04/12/2024</td>
               <td>09:00</td>
-          </tr>
-          <tr>
-              <td>12/11/2024</td>
-              <td>João Silva</td>
-              <td>12345</td>
-              <td>Raio-X</td>
-              <td>Raio-X do tórax</td>
-              <td>Hospital Central</td>
-              <td> 11:20</td>
-          </tr>
-          <tr>
-              <td>10/11/2024</td>
-              <td>João Silva</td>
-              <td>12345</td>
-              <td>Raio-X</td>
-              <td>Raio-X do tórax</td>
-              <td>Hospital Central</td>
-              <td> 16:00</td>
-          </tr>
-          <tr>
-              <td>01/11/2024 07:45</td>
-              <td>João Silva</td>
-              <td>12345</td>
-              <td>Raio-X</td>
-              <td>Raio-X do tórax</td>
-              <td>Hospital Central</td>
-              <td> 07:45</td>
-          </tr>
-          <tr>
-              <td>02/11/2024 </td>
-              <td>Maria Souza</td>
-              <td>67890</td>
-              <td>Ressonância</td>
-              <td>Ressonância magnética do cérebro</td>
-              <td>Hospital Norte</td>
-              <td>13:10</td>
-          </tr>
-          <tr>
-              <td>03/11/2024</td>
-              <td>Pedro Santos</td>
-              <td>54321</td>
-              <td>Ultrassonografia</td>
-              <td>Ultrassom do abdômen</td>
-              <td>Hospital Sul</td>
-              <td> 15:25</td>
-          </tr>
-          <tr>
-              <td>04/11/2024 </td>
-              <td>Lucas Pereira</td>
-              <td>11223</td>
-              <td>Tomografia</td>
-              <td>Tomografia do crânio</td>
-              <td>Hospital Central</td>
-              <td>09:30</td>
-          </tr>
-          <tr>
-              <td>05/11/2024</td>
-              <td>Fernanda Lima</td>
-              <td>33445</td>
-              <td>Raio-X</td>
-              <td>Raio-X da coluna</td>
-              <td>Hospital Norte</td>
-              <td> 12:50</td>
-          </tr>
-          <tr>
-              <td>06/11/2024</td>
-              <td>André Carvalho</td>
-              <td>55667</td>
-              <td>Ressonância</td>
-              <td>Ressonância do joelho</td>
-              <td>Hospital Sul</td>
-              <td> 08:40</td>
-          </tr>
-          <tr>
-              <td>07/11/2024 </td>
-              <td>Patrícia Alves</td>
-              <td>77889</td>
-              <td>Ultrassonografia</td>
-              <td>Ultrassom obstétrico</td>
-              <td>Hospital Central</td>
-              <td>14:20</td>
-          </tr>
-          <tr>
-              <td>08/11/2024 </td>
-              <td>Rafael Gonçalves</td>
-              <td>99001</td>
-              <td>Tomografia</td>
-              <td>Tomografia do tórax</td>
-              <td>Hospital Norte</td>
-              <td>10:30</td>
-          </tr>
-          <tr>
-              <td>09/11/2024 </td>
-              <td>Bianca Martins</td>
-              <td>22334</td>
-              <td>Raio-X</td>
-              <td>Raio-X do ombro</td>
-              <td>Hospital Sul</td>
-              <td>17:10</td>
-          </tr>
-          <tr>
-              <td>10/11/2024 </td>
-              <td>Henrique Souza</td>
-              <td>55678</td>
-              <td>Ressonância</td>
-              <td>Ressonância do abdômen</td>
-              <td>Hospital Central</td>
-              <td>18:25</td>
-          </tr>
-          <tr>
-              <td>11/11/2024</td>
-              <td>Mariana Torres</td>
-              <td>88900</td>
-              <td>Ultrassonografia</td>
-              <td>Ultrassom das mamas</td>
-              <td>Hospital Norte</td>
-              <td> 09:15</td>
-          </tr>
-          <tr>
-              <td>12/11/2024</td>
-              <td>Carlos Santos</td>
-              <td>22334</td>
-              <td>Tomografia</td>
-              <td>Tomografia do abdômen</td>
-              <td>Hospital Sul</td>
-              <td> 13:35</td>
-          </tr>
-          <tr>
-              <td>13/11/2024 </td>
-              <td>Camila Rocha</td>
-              <td>33445</td>
-              <td>Raio-X</td>
-              <td>Raio-X da mão</td>
-              <td>Hospital Central</td>
-              <td>07:50</td>
-          </tr>
-          <tr>
-              <td>14/11/2024 </td>
-              <td>Gabriel Mendes</td>
-              <td>55678</td>
-              <td>Ressonância</td>
-              <td>Ressonância do tórax</td>
-              <td>Hospital Norte</td>
-              <td>15:45</td>
-          </tr>
-          <tr>
-              <td>15/11/2024 </td>
-              <td>Julia Freitas</td>
-              <td>77890</td>
-              <td>Ultrassonografia</td>
-              <td>Ultrassom do coração</td>
-              <td>Hospital Sul</td>
-              <td>08:25</td>
-          </tr>
-          <tr>
-              <td>16/11/2024 </td>
-              <td>Roberto Nunes</td>
-              <td>99001</td>
-              <td>Tomografia</td>
-              <td>Tomografia da coluna</td>
-              <td>Hospital Central</td>
-              <td>10:50</td>
-          </tr>
-          <tr>
-              <td>17/11/2024</td>
-              <td>Ana Oliveira</td>
-              <td>11223</td>
-              <td>Raio-X</td>
-              <td>Raio-X do pé</td>
-              <td>Hospital Norte</td>
-              <td> 09:40</td>
-          </tr>
-          <tr>
-              <td>18/11/2024 </td>
-              <td>Victor Reis</td>
-              <td>33445</td>
-              <td>Ressonância</td>
-              <td>Ressonância da coluna cervical</td>
-              <td>Hospital Sul</td>
-              <td>14:00</td>
-          </tr>                 
+              <td>Tomografia Computadorizada</td>
+              <td id="description-table">  
+                <p>Tomografia tórax </p>
+                
+                <button class="btn-table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15"/>
+                  </svg>
+                </button>
+              <td>Concluído</td>
+              <td>Pneumologia</td>
+              <td>Dra. Ana Costa</td>
+              <td>Hospital Regional</td>
+              <td> 
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Juliana Martins (F) & (29)</td>
+              <td>05/12/2024</td>
+              <td>11:15</td>
+              <td>Radiografia</td>
+              <td class="description-table">  
+                <p>Tomografia de Tórax</p>
+                
+                <button class="btn-table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15"/>
+                  </svg>
+                </button>
+              </td>
+              <td>Concluído</td>
+              <td>Neurologia</td>
+              <td>Dr. Eduardo Pereira</td>
+              <td>Clínica São Lucas</td>
+              <td> 
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Lucas Rocha (M) & (50)</td>
+              <td>02/12/2024</td>
+              <td>13:45</td>
+              <td>Ecocardiograma</td>
+              <td class="description-table">  
+                <p>Ecocardiograma com Doppler</p>
+                <button class="btn-table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15"/>
+                  </svg>
+                </button>
+              </td>
+              <td>Concluído</td>
+              <td>Cardiologia</td>
+              <td>Dra. Mariana Andrade</td>
+              <td>Instituto do Coração</td>
+              <td> 
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
           </tbody>
         </table>       
-      </section>
+  </section>
 </main>
 <footer>
 
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="{% static '../static/assets/js/provisorio.js' %}" defer></script>
+<script src="{% static 'assets/js/provisorio.js' %}" ></script>
 </body>
 </html>
