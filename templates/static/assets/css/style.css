@@ -197,29 +197,31 @@ body{
 }
 
 table {
-    border-collapse: collapse;
-    overflow: hidden; 
-    border-spacing: 0;
     width: 100%;
-
+    overflow: hidden; 
+    border-collapse: collapse;
+    font-size: 14px;
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid ;
+td {
+    padding: 5px;
+    text-align: left;
+    border-left: 2px solid var(--cor2) !important;
 }
 
 th {
     background-color: #2d343f;
     color: var(--cor8) ;
     font-weight: bolder;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 tr{
     background-color: var(--cor5);
     color:var(--cor8) ;
     font-weight: 600;
-    height: 20px;
 }
 
 tr:nth-child(even) {
@@ -228,11 +230,6 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: var(--cor6);
-}
-
-.btn-situacao, label{
-    display: inline-block;
-    vertical-align: middle
 }
 
 .btn-table{
@@ -244,32 +241,59 @@ tr:hover {
 
 /* bootstrap */
 
-/* .filter-button {
-    background-color: var(--cor2) !important; 
-    color: var(--cor8) !important; 
-    width: 200px;
-    height: 30px;
-    font-weight: bolder !important;
-    font-size: 13px !important;
-    border: none;
-    border-radius: 10px  !important;
-}
-
-.filter-dropdown {
-    background-color: var(--cor2) !important;
-}
-
-.filter-input, .filter-button-small {
-    width: 180px;
-    height: 30px;
-    font-weight: bolder !important;
-    font-size: 13px !important;
-    background-color: var(--cor2) !important;
-    color: var(--cor8) !important;
-    border: none;
-} */
-
 .btn-drop{
     background-color: var(--cor3) !important;
     border: none !important;
+}
+
+
+.position-td{ 
+    position: relative;
+    padding-right: 20px;
+    width: 200px;
+}
+
+.position-tdB{ 
+    position: relative;
+    padding-right: 20px;
+    width: 115px;
+}
+
+
+.position-tdB > input[type="button"]{
+    position: absolute;
+    top: 50%;
+    left: 78%;
+    transform: translateY(-50%);
+}
+
+.position-td > .img-description{
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translateY(-50%);
+}
+
+.btn-assinado {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(57, 156, 57);
+    border: none;
+    border-radius: 50%;
+}
+
+.btn-informativo {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(19, 19, 54);
+    border: none;
+    border-radius: 50%;
+}
+
+.btn-cancelado {
+    width: 15px;
+    height: 15px;
+    background-color: var(--cor7);
+    border: none;
+    border-radius: 50%;
 }

@@ -1,36 +1,49 @@
-const INPUT_BUSCA = document.getElementById('input-busca');
-const TABELA_DADOS = document.getElementById('tabela-dados');
 
-INPUT_BUSCA.addEventListener('keyup', () => {
-    let expressao = INPUT_BUSCA.value.toLowerCase();
+function filtrarTabela() {
+    const modalidade = document.getElementById("select-modalidade").value;
+    const unidade = document.getElementById("select-unidade").value;
+    const linhasExibir = parseInt(document.getElementById("linhas").value) || 0;
+    const linhasTabela = document.querySelectorAll("#tabela-dados tr");
 
-    // if (expressao.length <= 2) {
-    //     // Se for, exibe todas as linhas e retorna
-    //     for (let linha of TABELA_DADOS.getElementsByTagName('tr')) {
-    //         linha.style.display = ''; // Mostra todas as linhas
-    //     }
-    //     return; // Sai da função
-    // }
 
-    // pesquisa o valor digitado dentro do id tabela dados nas linhas que estão envolvidas com <tr>
-    let linhas = TABELA_DADOS.getElementsByTagName('tr');
+    linhasTabela.forEach((linha, index) => {
+        const modalidadeLinha = linha.cells[3]?.innerText; // Modalidade do exame
+        const unidadeLinha = linha.cells[8]?.innerText; // Instituição
 
-    console.log(linhas);
-    for(let posicao in linhas){
-        // verificar se é um numero ou nao 
-        if (true === isNaN(posicao)){
-            continue;
-        }
+        const exibirPorFiltro = (!modalidade || modalidade === modalidadeLinha) &&
+                                (!unidade || unidade === unidadeLinha);
 
-        let conteudodalinha = linhas[posicao].innerHTML.toLowerCase();
+        const exibirPorQuantidade = linhasExibir === 0 || index < linhasExibir;
 
-         // mostra as linhas que tem o conteudo do usuario
-        if(true === conteudodalinha.includes(expressao)) { 
-            linhas[posicao].style.display = '';           
-        } 
-         // oculta as outras linhas que não tem o que o usuario digitou
-        else{
-            linhas[posicao].style.display = 'none';
-        }
-    }
+        linha.style.display = exibirPorFiltro && exibirPorQuantidade ? "" : "none";
+    });
+}
+
+// Função para limpar os filtros e exibir todos os registros
+function limparFiltros() {
+    document.getElementById("select-modalidade").selectedIndex = 0;
+    document.getElementById("select-unidade").selectedIndex = 0;
+    document.getElementById("linhas").value = "";
+
+    const linhasTabela = document.querySelectorAll("#tabela-dados tr");
+    linhasTabela.forEach((linha) => {
+        linha.style.display = "";
+    });
+}
+
+// Adicionar evento ao botão "Pesquisar"
+document.addEventListener("DOMContentLoaded", () => {
+    const botaoPesquisar = document.querySelector("btn-pesquisar");
+    const botaoLimpar = document.querySelectorAll("btn-limpar")[1];
+
+    botaoPesquisar.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        filtrarTabela();
+    });
+
+
+    botaoLimpar.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        limparFiltros(); 
+    });
 });
