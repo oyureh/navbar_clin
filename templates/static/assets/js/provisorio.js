@@ -21,13 +21,4 @@ menu_opcoes.addEventListener('click', function () {
 // **********************************FIM  filter task ********************************************************
 // ******************************************************************************************************** 
 
-const select = document.getElementById('select-unidade');
-select.addEventListener('click', () => {
-  select.classList.toggle('rotate-arrow');
-});
-
-const selectb = document.getElementById('select-modalidade');
-selectb.addEventListener('click', () => {
-  selectb.classList.toggle('rotate-arrow');
-});
 

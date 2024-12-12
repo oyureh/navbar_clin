@@ -157,7 +157,7 @@ body{
 
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     #menu-bottom {
         flex-direction: column; 
     }
@@ -188,7 +188,7 @@ body{
     #menu-bottom {
         padding: 5px;
     }
-}
+} */
 
 /* fim menus */
 

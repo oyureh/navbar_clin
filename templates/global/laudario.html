@@ -42,15 +42,15 @@
               <section class="container-dates">
                 <section class="dates">
                   <label for="data inicio">Data início</label>
-                  <input class="select" type="date" name="data inicio" id="">
+                  <input class="select" type="date" name="data inicio" id="data-inicio">
                 </section>
                 <section class="dates">
                   <label for="data fim">Data fim</label>
-                  <input  class="select" type="date" name="data fim" id="">
+                  <input  class="select" type="date" name="data-fim" id="data-fim">
                 </section>
               </section>
 
-              <select class="select" id="select-modalidade" onchange="filtrarTabela()">
+              <select class="select" id="select-modalidade" >
                 <option value="" disabled selected>Modalidade</option>
                 <option value="Raio-X">Raio-X</option>
                 <option value="Ressonância">Ressonância</option>
@@ -60,7 +60,7 @@
                 <option value=""></option>
               </select>
 
-              <select class="select" id="select-unidade" onchange="filtrarTabela()">
+              <select class="select" id="select-unidade" >
                   <option value="" disabled selected>Instituição</option>
                   <option value="Hospital Central">Hospital Central</option>
                   <option value="Hospital Norte">Hospital Norte</option>
@@ -68,28 +68,29 @@
                   <option value=""></option>
               </select>
             
-                <input class="select" type="number" id="linhas" min="1" oninput="mostrarLinhas()" placeholder="Laudos a exibir"/>
+                <input class="select" type="number" id="linhas" min="1" placeholder="Laudos a exibir"/>
 
-                <select class="select" name="" id="">
+                <select class="select" name="" id="exame-situacao">
                   <option value=""  disabled selected>Situação do exame</option>
                   <option value="Urgente">Urgente</option>
                   <option value="Letivo">Letivo</option>
                   <option value=""></option>
                 </select>
                 
-                <select class="select" name="" id="">
+                <select class="select" name="" id="medico">
                   <option value="" disabled selected>Médico (todos)</option>
-                  <option value=""></option>
+                  <option value="Dr. Pedro Almeida">Dr. Pedro Almeida</option>
                 </select>
 
-                <select class="select" name="" id="">
+                <select class="select" name="" id="situacao-laudo">
                   <option value=""  disabled selected>Situação do laudo</option>
-                  <option value="Urgente">Urgente</option>
-                  <option value="Letivo">Letivo</option>
+                  <option value="Assinado">Assinado</option>
+                  <option value="Informativo">Informativo</option>
+                  <option value="Cancelado">Cancelado</option>
                   <option value=""></option>
                 </select>
 
-                <select class="select" name="" id="">
+                <select class="select" name="" id="view_laudos">
                   <option value=""  disabled selected>Selecionar laudos</option>
                   <option value="">Ultimos 10 Laudos</option>
                   <option value="">Ultimos 30 Laudos</option>
@@ -98,12 +99,14 @@
                   <option value=""></option>
                 </select>
 
-                <button type="button" id="btn-pesquisar" class="btn  btn-sm btn-danger">Pesquisar   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <button type="button" id="btn-pesquisar" class="btn  btn-sm btn-danger" onclick="search">Pesquisar   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                 </svg></button>
-                <button type="button" id="btn-limpar" class="btn  btn-sm btn-danger">Limpar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <button type="button" id="btn-limpar" class="btn  btn-sm btn-danger" onclick="clear" >Limpar 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                </svg></button>
+                  </svg>
+                </button>
 
           </section>      
         </section>  
@@ -230,9 +233,10 @@
               <td>Radiografia</td>
               
               <td class="position-td">
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
                 <p>Radiografia corpo</p>
 
-                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+                
               </td>
 
               <td class="position-tdB">
@@ -283,6 +287,174 @@
                 </a>
               </td>
             </tr>
+            <tr>
+              <td>Maria Souza (F) & (34)</td>
+              <td>06/12/2024</td>
+              <td>08:45</td>
+              <td>Raio-X</td>
+              <td class="position-td">
+                  <p>Raio-X de Tórax</p>
+                  <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+              <td class="position-tdB">
+                  <label for="btn-assinado">Assinado</label>
+                  <input type="button" name="btn-assinado" class="btn-assinado" value="">
+              </td>
+              <td>Pneumologia</td>
+              <td>Dr. Ana Paula</td>
+              <td>Hospital Norte</td>
+              <td>
+                  <a href="" target="_blank" rel="noopener noreferrer">
+                      <button class="btn-table">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                              <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                          </svg>
+                      </button>
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td>Lucas Pereira (M) & (29)</td>
+              <td>07/12/2024</td>
+              <td>10:15</td>
+              <td>Tomografia</td>
+              <td class="position-td">
+                  <p>Tomografia Computadorizada de Abdômen</p>
+                  <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+              <td class="position-tdB">
+                  <label for="btn-assinado">Assinado</label>
+                  <input type="button" name="btn-assinado" class="btn-assinado" value="">
+              </td>
+              <td>Gastroenterologia</td>
+              <td>Dr. João Carlos</td>
+              <td>Hospital Central</td>
+              <td>
+                  <a href="" target="_blank" rel="noopener noreferrer">
+                      <button class="btn-table">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                              <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                          </svg>
+                      </button>
+                  </a>
+              </td>
+          </tr>
+          
+          <tr>
+            <td>Maria Souza (F) & (34)</td>
+            <td>06/12/2024</td>
+            <td>08:45</td>
+            <td>Raio-X</td>
+            <td class="position-td">
+                <p>Raio-X de Tórax</p>
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+            </td>
+            <td class="position-tdB">
+                <label for="btn-assinado">Assinado</label>
+                <input type="button" name="btn-assinado" class="btn-assinado" value="">
+            </td>
+            <td>Pneumologia</td>
+            <td>Dr. Ana Paula</td>
+            <td>Hospital Norte</td>
+            <td>
+                <a href="" target="_blank" rel="noopener noreferrer">
+                    <button class="btn-table">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                            <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>Lucas Pereira (M) & (29)</td>
+            <td>07/12/2024</td>
+            <td>10:15</td>
+            <td>Tomografia</td>
+            <td class="position-td">
+                <p>Tomografia Computadorizada de Abdômen</p>
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+            </td>
+            <td class="position-tdB">
+                <label for="btn-assinado">Não Assinado</label>
+                <input type="button" name="btn-assinado" class="btn-assinado" value="">
+            </td>
+            <td>Gastroenterologia</td>
+            <td>Dr. João Carlos</td>
+            <td>Hospital Central</td>
+            <td>
+                <a href="" target="_blank" rel="noopener noreferrer">
+                    <button class="btn-table">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                            <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        
+        <tr>
+          <td>Maria Souza (F) & (34)</td>
+          <td>06/12/2024</td>
+          <td>08:45</td>
+          <td>Raio-X</td>
+          <td class="position-td">
+              <p>Raio-X de Tórax</p>
+              <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+          </td>
+          <td class="position-tdB">
+              <label for="btn-assinado">Assinado</label>
+              <input type="button" name="btn-assinado" class="btn-assinado" value="">
+          </td>
+          <td>Pneumologia</td>
+          <td>Dr. Ana Paula</td>
+          <td>Hospital Norte</td>
+          <td>
+              <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                          <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+              </a>
+          </td>
+      </tr>
+      <tr>
+          <td>Lucas Pereira (M) & (29)</td>
+          <td>07/12/2024</td>
+          <td>10:15</td>
+          <td>Tomografia</td>
+          <td class="position-td">
+              <p>Tomografia Computadorizada de Abdômen</p>
+              <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+          </td>
+          <td class="position-tdB">
+              <label for="btn-assinado">Não Assinado</label>
+              <input type="button" name="btn-assinado" class="btn-assinado" value="">
+          </td>
+          <td>Gastroenterologia</td>
+          <td>Dr. João Carlos</td>
+          <td>Hospital Central</td>
+          <td>
+              <a href="" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                          <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+              </a>
+          </td>
+      </tr>
+
+      
+        
+          
           </tbody>
         </table>       
   </section>
@@ -292,5 +464,7 @@
 </footer>
 <script src="{% static 'assets/js/provisorio.js' %}" ></script>
 <script src="{% static 'assets/js/filtertask.js' %}"></script>
+
+
 </body>
 </html>
