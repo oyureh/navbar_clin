@@ -2,5 +2,6 @@ from django.urls import path
 from applaudos import views
 
 urlpatterns = [
-    path('', views.laudario, name='laudario'),
+    path('', views.tabelaLaudos, name='tabelaLaudos'),
+    path('laudario/', views.laudario, name='laudario'),
 ]

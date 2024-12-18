@@ -1,0 +1,17 @@
+{% load static %}
+<header class="header-partials">
+    <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="65px" height="55px"></figure>
+
+    <button type="button" class="btn btn-header btn-primary position-relative  border-0">
+        <img class="img-perfil" src="{% static 'assets/imgs/fotopadraoperfil.png' %}" alt="">
+        <section class="p-header">
+            <p>Italo</p>
+            <p class="p-email">italomedico@gmail.com</p>
+        </section>
+    </button>
+</header>
+<section class="sub-header">
+    <h4> Laudo de Lais</h4> 
+
+    <a href="{% url 'tabelaLaudos'%}"><button class="button-laudo button-padding"> <img src="{% static 'assets/imgs/arrow-left.svg' %}" alt="seta para esquerda"> Voltar para a lista de exames</button></a>
+</section>

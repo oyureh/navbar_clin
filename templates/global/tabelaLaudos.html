@@ -1,0 +1,298 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela laudos</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<header>
+
+    <div class="container-center">
+        <section class="header-top">
+            <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="65px" height="55px"></figure>
+            <button id="menuopcoes"><img src="{% static '../static/assets/imgs/justify (1).svg' %}" alt="Clique e abra o menu"  class="img-header" ></button>
+
+            <button type="button" class="btn btn-header btn-primary position-relative  border-0">
+              <img class="img-perfil" src="{% static 'assets/imgs/fotopadraoperfil.png' %}" alt="">
+              <section class="p-header">
+                  <p>Italo</p>
+                  <p class="p-email">italomedico@gmail.com</p>
+              </section>
+            </button>
+
+        </section>
+
+        <section id="menu-bottom">
+
+          <section class="search-box">
+            <input id="input-busca" type="text"  placeholder="Pesquisar" >
+            <img  class="search-btn" src="{% static '../static/assets/imgs/lupa.svg' %}" alt="lupa" width="30px" height="30px">
+          </section>      
+
+          <section>
+              <section class="container-dates">
+                <section class="dates">
+                  <label for="data inicio">Data início</label>
+                  <input class="select" type="date" name="data inicio" id="data-inicio">
+                </section>
+                <section class="dates">
+                  <label for="data fim">Data fim</label>
+                  <input  class="select" type="date" name="data-fim" id="data-fim">
+                </section>
+              </section>
+
+              <select class="select" id="select-modalidade" >
+                <option value="" disabled selected>Modalidade</option>
+                <option value="Raio-X">Raio-X</option>
+                <option value="Ressonância">Ressonância</option>
+                <option value="Ultrassonografia">Ultrassonografia</option>
+                <option value="Tomografia">Tomografia</option>
+                <option value="Radiografia">Radiografia</option>
+                <option value=""></option>
+              </select>
+
+              <select class="select" id="select-unidade" >
+                  <option value="" disabled selected>Instituição</option>
+                  <option value="Hospital Central">Hospital Central</option>
+                  <option value="Hospital Norte">Hospital Norte</option>
+                  <option value="Hospital Sul">Hospital Sul</option>
+                  <option value=""></option>
+              </select>
+            
+                <input class="select" type="number" id="linhas" min="1" placeholder="Laudos a exibir"/>
+
+                <select class="select" name="" id="exame-situacao">
+                  <option value=""  disabled selected>Situação do exame</option>
+                  <option value="Urgente">Urgente</option>
+                  <option value="Letivo">Letivo</option>
+                  <option value=""></option>
+                </select>
+                
+                <select class="select" name="" id="medico">
+                  <option value="" disabled selected>Médico (todos)</option>
+                  <option value="Dr. Pedro Almeida">Dr. Pedro Almeida</option>
+                </select>
+
+                <select class="select" name="" id="situacao-laudo">
+                  <option value=""  disabled selected>Situação do laudo</option>
+                  <option value="Assinado">Assinado</option>
+                  <option value="Informativo">Informativo</option>
+                  <option value="Cancelado">Cancelado</option>
+                  <option value=""></option>
+                </select>
+
+                <select class="select" name="" id="view_laudos">
+                  <option value=""  disabled selected>Selecionar laudos</option>
+                  <option value="">Ultimos 10 Laudos</option>
+                  <option value="">Ultimos 30 Laudos</option>
+                  <option value="">Ultimos 50 Laudos</option>
+                  <option value="">Ultimos 100 Laudos</option>
+                  <option value=""></option>
+                </select>
+
+                <button type="button" id="btn-pesquisar" class="btn  btn-sm btn-danger" onclick="search">Pesquisar   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg></button>
+                <button type="button" id="btn-limpar" class="btn  btn-sm btn-danger" onclick="clear" >Limpar 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </button>
+
+          </section>      
+        </section>  
+    </div>
+</header>
+<br>
+<br>
+<main>
+    <section class="table-responsive">
+        <table id="tabela">
+           
+          <thead>
+            <tr>
+              <th>Paciente (Sexo) & (Idade)</th>
+              <th>Data do Exame</th>
+              <th>Horario</th> 
+              <th>Modalidade do Exame</th>
+              <th>Descrição do Exame</th>
+              <th>Situação </th>
+              <TH> Especilidade </TH>
+              <th>Médico do laudo</th>
+              <th>Instituição</th>
+              <th> Laudo </th>
+            </tr>
+          </thead>
+          <tbody id="tabela-dados">
+            <tr>
+              <td>João Silva (M) & (45)</td>
+              <td>05/12/2024</td>
+              <td>14:30</td>
+              <td>Ressonância Magnética</td>
+              
+              <td class="position-td">
+                <p>Ressonância Magnética de Joelho Direito</p>
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+              
+              <td class="position-tdB">
+                <label for="btn-assinado">Assinado</label>
+                <input type="button" name="btn-assinado" class="btn-assinado" value="">
+              </td>
+              
+              <td>Ortopedia</td>
+              <td>Dr. Pedro Almeida</td>
+              <td>Hospital Central</td>
+              <td> 
+                <a href="{% url 'laudario'%}" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Maria Oliveira (F) & (34)</td>
+              <td>03/12/2024</td>
+              <td>10:00</td>
+              <td>Ultrassonografia</td>
+
+              <td class="position-td">
+                <p>Ultrassom abdomen</p>
+
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+
+              <td class="position-tdB">
+                <label for="btn-cancelado">Cancelado</label>
+                <input type="button" name="btn-cancelado" class="btn-cancelado" value="">
+              </td>
+              <td>Gastroenterologia</td>
+              <td>Dr. Lucas Mendes</td>
+              <td>Clínica Vida</td>
+              <td> 
+                <a href="{% url 'laudario'%}" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Carlos Ferreira (M) & (62)</td>
+              <td>04/12/2024</td>
+              <td>09:00</td>
+              <td>Tomografia Computadorizada</td>
+              
+              <td class="position-td">
+                <p>Tomografia Tórax</p>
+
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+
+              <td class="position-tdB">
+                <label for="btn-informativo">Informativo</label>
+                <input type="button" name="btn-informativo" class="btn-informativo" value="">
+              </td>
+              <td>Pneumologia</td>
+              <td>Dra. Ana Costa</td>
+              <td>Hospital Regional</td>
+              <td> 
+                <a href="{% url 'laudario'%}" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Juliana Martins (F) & (29)</td>
+              <td>05/12/2024</td>
+              <td>11:15</td>
+              <td>Radiografia</td>
+              
+              <td class="position-td">
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+                <p>Radiografia corpo</p>
+
+                
+              </td>
+
+              <td class="position-tdB">
+                <label for="btn-assinado">Assinado</label>
+                <input type="button" name="btn-assinado" class="btn-assinado" value="">
+              </td>
+              <td>Neurologia</td>
+              <td>Dr. Eduardo Pereira</td>
+              <td>Clínica São Lucas</td>
+              <td> 
+                <a href="{% url 'laudario'%}" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Lucas Rocha (M) & (50)</td>
+              <td>02/12/2024</td>
+              <td>13:45</td>
+              <td>Ecocardiograma</td>
+
+              <td class="position-td">
+                <p>Ecocardiograma com Doppler</p>
+
+                <img class="img-description" src="{% static 'assets/imgs/chat-fill.svg'%}" alt="emoji chat box">
+              </td>
+
+              <td class="position-tdB">
+                <label for="btn-assinado">Assinado</label>
+                <input type="button" name="btn-assinado" class="btn-assinado" value="">
+              </td>
+              <td>Cardiologia</td>
+              <td>Dra. Mariana Andrade</td>
+              <td>Instituto do Coração</td>
+              <td> 
+                <a href="{% url 'laudario'%}" target="_blank" rel="noopener noreferrer">
+                  <button class="btn-table">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d6d6d6" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                      <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                      </svg>
+                  </button>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>       
+  </section>
+</main>
+<footer>
+
+</footer>
+<script src="{% static 'assets/js/provisorio.js' %}" ></script>
+<script src="{% static 'assets/js/filtertask.js' %}"></script>
+
+
+</body>
+</html>

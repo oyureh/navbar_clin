@@ -35,6 +35,57 @@ body{
     background-color: var(--cor3);
 }
 
+.header-partials{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 50px 10px 50px;
+    background-color: #1e2731 ;
+}
+
+.sub-header{
+    background-color: var(--cor3);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px 10px 30px;
+    border-bottom-left-radius: 10px ;
+    border-bottom-right-radius: 10px ;
+    margin-bottom: 20px;
+}
+
+.sub-header > a{
+    text-decoration: none;
+}
+
+.img-perfil{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+}
+
+.btn-header{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    background: linear-gradient(145deg, #2c3e50, #2c3a47af) !important;
+    box-shadow: 0 4px 6px rgba(100, 100, 100, 0.1), 0 6px 12px rgba(14, 14, 14, 0.692) !important;
+}
+
+.p-email{
+    font-size: 13px;
+}
+
+.p-header{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+}
+
 .header-top{
     display: flex;
     flex-direction: row;
@@ -68,6 +119,14 @@ body{
     border-radius: 50%;
 }
 
+.dropdown{
+    background-color: transparent !important;
+    transition: 0.2s ease-in-out  !important;
+}
+
+.dropdown:active{
+    transform: scale(0.95)  !important; 
+}
 /* Começo dropdown menu de pesquisa */
 
 #menu-bottom {
@@ -154,42 +213,6 @@ body{
     font-weight: bolder;
 }
 
-
-
-
-/* @media (max-width: 768px) {
-    #menu-bottom {
-        flex-direction: column; 
-    }
-
-    .search-box {
-        width: 100%;
-        max-width: 100%; 
-    }
-
-    #select-modalidade,
-    #select-unidade,
-    #linhas {
-        max-width: 100%; 
-    }
-}
-
-@media (max-width: 480px) {
-    .search-box {
-        flex-direction: column;
-        height: auto; 
-    }
-
-    .search-btn {
-        opacity: 0;
-        height: 0px;
-    }
-
-    #menu-bottom {
-        padding: 5px;
-    }
-} */
-
 /* fim menus */
 
 .table-responsive{
@@ -275,24 +298,24 @@ tr:hover {
 }
 
 .btn-assinado {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     background-color: rgb(57, 156, 57);
     border: none;
     border-radius: 50%;
 }
 
 .btn-informativo {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     background-color: rgb(19, 19, 54);
     border: none;
     border-radius: 50%;
 }
 
 .btn-cancelado {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     background-color: var(--cor7);
     border: none;
     border-radius: 50%;
