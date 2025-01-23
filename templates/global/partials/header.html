@@ -1,5 +1,5 @@
 {% load static %}
-<header class="header-partials">
+<!-- <header class="header-partials">
     <figure> <img src="{% static '../static/assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="" width="65px" height="55px"></figure>
 
     <button type="button" class="btn btn-header btn-primary position-relative  border-0">
@@ -14,4 +14,20 @@
     <h4> Laudo de Lais</h4> 
 
     <a href="{% url 'tabelaLaudos'%}"><button class="button-laudo button-padding"> <img src="{% static 'assets/imgs/arrow-left.svg' %}" alt="seta para esquerda"> Voltar para a lista de exames</button></a>
-</section>
+</section> -->
+
+<header>
+    <img src="{% static 'assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="Logo impixel"  width="45px" height="40px">
+
+    <a class="a-header-laudario" href="{% url 'tabelaLaudos' %}">
+        <button type="button" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Voltar para tabela de pacientes" style="background-color: #92181c;">
+            <img src="{% static 'assets/imgs/arrow-left.svg'%}" alt="emoji seta virada para esquerda"  width="19px" height="19px">
+        </button>
+    </a>
+
+    <section class="avatar-header">
+        <img  class="img-perfil" src="{% static 'assets/imgs/fotopadraoperfil.png' %}" alt="foto de perfil médico">
+        <p> Médico Italo</p>
+    </section>
+      
+</header>

@@ -136,9 +136,9 @@ body{
 
 #menu-bottom {
     padding: 10px;
-    width: 98%;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    width: 100%;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
     gap: 15px; 
 }
 
@@ -183,7 +183,8 @@ body{
 .container-dates{
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    align-items: center;
+    gap: 6px;
 }
 
 .dates{
@@ -193,20 +194,23 @@ body{
     font-weight: bold;
 }
 
+.select{
+    width: 135px; 
+    height: 32px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 10px;   
+    margin: 5px 0px 5px 0px
+}
+
 
 /* Estilo para os selects */
 .select {
-    max-width: 450px; 
-    height: 30px;
-    padding: 0px 10px 0px 10px;
-    border-radius: 10px;
     background-color: var(--cor2);
     color: var(--cor8);
     font-weight: bolder;
     font-size: 13px;
     border: none;
     outline: none;
-    margin: 5px 0; 
     text-align: left;
     -webkit-appearance: none; /* Remove a seta padrão no Chrome */
     -moz-appearance: none; /* Remove a seta padrão no Firefox */
@@ -216,6 +220,13 @@ body{
 #linhas::placeholder {
     color: var(--cor8);
     font-weight: bolder;
+}
+
+#btn-pesquisar, #btn-limpar{
+    border-radius: 10px !important;
+    padding: 0px 10px 0px 10px !important;
+    height: 32px !important;
+
 }
 
 /* fim menus */
@@ -330,9 +341,12 @@ tr:hover {
 
 .container-main {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    padding: 20px;
+    flex-direction: row;
+    justify-content:right;
+    padding: 20px 20px 0px 0px;
+    width: 95%;
+    height: 100%;
+    float: right;
 }
 
 .container-rigth {
@@ -452,4 +466,41 @@ ul {
         font-size: 0.8rem;
         height: 35px;
     }
+}
+
+
+.titulo-accordion{
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+.alinhar-accordion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.informacoes-paciente{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.informacoes-paciente > h6{
+    margin: 0px !important;
+    font-weight: 700;
+}
+
+.informacoes-paciente > p{
+    background-color: #292f3b;
+    width: 150px;
+    padding: 5px 0px 5px 0px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0px !important;
 }
