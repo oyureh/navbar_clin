@@ -17,17 +17,33 @@
 </section> -->
 
 <header>
-    <img src="{% static 'assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="Logo impixel"  width="45px" height="40px">
+    <section class="container-conjuto">
+        <img src="{% static 'assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="Logo impixel"  width="45px" height="40px">
+        <a class="a-header-laudario" href="{% url 'tabelaLaudos' %}">
+            <button type="button" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Voltar para tabela de pacientes" style="background-color: #92181c;">
+                <img src="{% static 'assets/imgs/arrow-left.svg'%}" alt="emoji seta virada para esquerda"  width="19px" height="19px">
+            </button>
+        </a>
+    </section>
 
-    <a class="a-header-laudario" href="{% url 'tabelaLaudos' %}">
-        <button type="button" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Voltar para tabela de pacientes" style="background-color: #92181c;">
-            <img src="{% static 'assets/imgs/arrow-left.svg'%}" alt="emoji seta virada para esquerda"  width="19px" height="19px">
+    <section class="buttons-header">
+        <button type="button button-laudo-header" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content=" Duplicar exame" >
+            <img class="img-btn-header" src="{% static 'assets/imgs/copy.svg' %}" alt="">
         </button>
-    </a>
 
+        <button type="button button-laudo-header" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Salvar dados do laudo" >
+            <img class="img-btn-header" src="{% static 'assets/imgs/floppy.svg' %}" alt="">
+        </button>
+
+        <button type="button button-laudo-header" class="btn button-back border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Assinar laudo"  data-bs-custom-class="custom-popover" >
+            <img class="img-btn-header" src="{% static 'assets/imgs/pencil-square.svg' %}" alt="">
+        </button>
+    </section>
+    
     <section class="avatar-header">
         <img  class="img-perfil" src="{% static 'assets/imgs/fotopadraoperfil.png' %}" alt="foto de perfil médico">
         <p> Médico Italo</p>
     </section>
       
 </header>
+

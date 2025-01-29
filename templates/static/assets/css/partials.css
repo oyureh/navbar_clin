@@ -1,3 +1,14 @@
+:root{
+    --cor1: #e0363b;
+    --cor2:#585858; 
+    --cor3: #323a47;
+    --cor5: #3e454e;
+    --cor6:#1d232f ; 
+    --cor7: #92181c;
+    --cor8:#d6d6d6;
+    --cor09: #2b3446;
+ }
+
 header {
     width: 50px; 
     height: 100%;
@@ -7,7 +18,10 @@ header {
     justify-content: space-between;
     position: fixed;
     background-color: var(--cor09);
+    z-index: 1000;
+    overflow: visible; /* Permite que os botões "saiam" da sidebar */
 }
+
 
 header > img{
     margin-top: 20px;
@@ -48,3 +62,52 @@ header > img{
     color: var(--cor7) !important;
     text-decoration: none;
 }
+
+.buttons-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-width: 50px; /* Define um mínimo para evitar cortes */
+    position: relative; /* Evita sobreposições */
+}
+
+.button-laudo-header {
+    border: none;
+    outline: none;
+    background-color: var(--cor7);
+    border-radius: 10px;
+    color: var(--cor8);
+    font-weight: 700;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajustes nas imagens dos botões */
+.img-btn-header {
+    width: 20px;
+    height: 20px;
+} 
+
+
+.button-laudo-header:active {
+    transform: scale(0.95);
+}
+
+
+
+.container-conjuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+}
+

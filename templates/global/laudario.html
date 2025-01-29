@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}?v=1">
-    <link rel="stylesheet" href="{% static 'assets/css/partials.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/partials.css'%}?v=1">
+    <link rel="stylesheet" href="../static/assets/css/partials.css">
     <link rel="stylesheet" href="../static/assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/so3qfi9exwyon8gi9xspijwplkefjswvvum3cpy6nigg32ig/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -30,6 +31,7 @@
         </section>
           
     </header> -->
+
     <main>
         <section class="container-main">
             <textarea></textarea>
@@ -48,29 +50,58 @@
 
                 <section class="container-dados">
                     <section class="dados-laudo">
-                        <p>Prioridade: NÃO</p>
+                        <section class="alinhamento-horizontal">
+                            <p>Prioridade: NÃO</p>
+                            <button class="button-laudo button-padding"><img src="{% static 'assets/imgs/image-fill.svg' %}" alt=""> Vizualizar </button>
+                        </section>
                         <section class="alinhamento">
                             <p>&#9792; Lais Santos <ul><li>24</li></ul></p>
                         </section>
                         <button class="CR">CR</button> <data value="">31/12/2024 09:12H</data>
                         <p>Estudo: Colunas</p>
                         <p>Unidade: Preven imperatriz</p>
-                        <button class="button-laudo button-padding"><img src="{% static 'assets/imgs/image-fill.svg' %}" alt=""> Ver exame</button>
+                        
+                        
                     </section>
 
-                    <section class="buttons">
+                    <!-- <section class="buttons">
                         <button class="button-laudo"><img src="{% static 'assets/imgs/copy.svg' %}" alt=""> Duplicar exame</button>
                         <button class="button-laudo"><img src="{% static 'assets/imgs/floppy.svg' %}" alt=""> Salvar dados do laudo</button>
                         <button class="button-laudo"><img src="{% static 'assets/imgs/pencil-square.svg' %}" alt=""> Assinar laudo</button>
-                    </section>
+                    </section> -->
+                    <br>
+
+                    <button type="button" class=" button-modal btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Mais detalhes
+                      </button>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Informações detalhadas do paciente</h1>
+                              <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              ...
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </section>
+
+
             </section>
         </section>
     </main>
     <script>
         tinymce.init({
             selector: 'textarea',
-            width: '100%',
+            width: '98%',
             content_style: "body { background-color: #2b3446; color: #ffffff; }",
             skin: "oxide-dark",
             content_css: "dark", 
@@ -100,5 +131,16 @@
           });
         });
       </script>
+
+      <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+      </script>
+
+<script src="{% static 'assets/js/expandbutton.js'%}"></script>
 </body>
 </html>
