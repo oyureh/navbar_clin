@@ -8,7 +8,7 @@
 
 
  :root{
-    --cor1: #e0363b;
+    --cor1: #a3080d;
     --cor2:#585858; 
     --cor3: #323a47;
     --cor5: #3e454e;
@@ -344,7 +344,7 @@ tr:hover {
     flex-direction: row;
     justify-content:right;
     padding: 20px 20px 0px 0px;
-    width: 95%;
+    width: 98vw;
     height: 92vh;
     float: right;
 }
@@ -384,6 +384,9 @@ tr:hover {
 .dados-laudo {
     text-align: left;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .CR {
@@ -395,6 +398,7 @@ tr:hover {
     width: auto;
     color: var(--cor8);
     transition: 0.1s ease;
+    width: 40px;
 }
 
 .CR:hover {
@@ -402,9 +406,32 @@ tr:hover {
 }
 
 .buttons {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content:flex-end;
+    align-items:center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.btn-container{
+    width: 60%;
+}
+
+
+.button-laudo-b{
+    height: 50px !important;
+    width: 50px !important;
+    border: none;
+    outline: none;
+    transition: 0.2s ease;
+    background-color: var(--cor7);
+    border-radius: 10px;
+    color: var(--cor8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px !important;
 }
 
 .alinhamento {
@@ -424,6 +451,14 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.alinhamento-vertical{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Responsividade para telas menores ou iguais a 1000px */
@@ -436,11 +471,6 @@ ul {
 
     .container-rigth {
         width: 100%;
-    }
-
-    .buttons {
-        flex-direction: column;
-        gap: 10px;
     }
 
     .CR {
@@ -497,29 +527,37 @@ ul {
     border: none;
     outline: none;
     transition: 0.2s ease;
-    background-color: var(--cor7);
+    background-color: var(--cor1);
     border-radius: 10px;
     color: var(--cor8);
     font-weight: 700;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
+    justify-content: space-between;
+    font-size: 15px !important;
+    width:85px;
+    padding: 0px 5px 0px 5px !important;
 }
 
-.button-modal{
+.button-laudo-white {
     height: 40px;
-    width: 50%;
     border: none;
     outline: none;
-    background-color: var(--cor7);
+    transition: 0.2s ease;
+    background-color: #cccbcb;
     border-radius: 10px;
-    color: var(--cor8);
+    color: var(--cor7);
     font-weight: 700;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    font-size: 15px !important;
+    width:100px;
+    padding: 0px 5px 0px 5px !important;
+    float: left;
 }
+
+
 
 .button-laudo:active {
     transform: scale(0.97);

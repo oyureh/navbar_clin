@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}?v=1">
     <link rel="stylesheet" href="{% static 'assets/css/partials.css'%}?v=1">
-    <link rel="stylesheet" href="../static/assets/css/partials.css">
     <link rel="stylesheet" href="../static/assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/so3qfi9exwyon8gi9xspijwplkefjswvvum3cpy6nigg32ig/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -15,7 +14,6 @@
     <title>Laudario</title>
 </head>
 <body>
-    {% include 'global/partials/header.html' %}
     <!-- <header>
         <img src="{% static 'assets/imgs/Logo-impixel-removebg-preview.png' %}" alt="Logo impixel"  width="45px" height="40px">
 
@@ -43,55 +41,77 @@
                         <option value="" disabled selected>Situação do exame</option>
                         <option value="Raio-x">Raio-x</option>
                     </select>
-
-                    <label for="search-mascaras" style="color: aliceblue;">Ou pesquise</label>
-                    <input class="inputs-mascaras" type="text" id="search-mascaras" placeholder="Pesquise as Máscaras DX por aqui">
                 </section>
 
                 <section class="container-dados">
                     <section class="dados-laudo">
                         <section class="alinhamento-horizontal">
                             <p>Prioridade: NÃO</p>
-                            <button class="button-laudo button-padding"><img src="{% static 'assets/imgs/image-fill.svg' %}" alt=""> Vizualizar </button>
+                              <button class="button-laudo">
+                                <img src="{% static 'assets/imgs/eye.svg' %}" alt="" width="25" height="25">
+                                PACS
+                              </button>
+                              
+                            
+                           
                         </section>
-                        <section class="alinhamento">
-                            <p>&#9792; Lais Santos <ul><li>24</li></ul></p>
+                        <section class="alinhamento-horizontal">
+                            <p>&#9792; Lais Santos 24</p>
+
+                            <button type="button" class="button-laudo border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                             <img src="{% static 'assets/imgs/info-circle.svg'%}" alt="" width="25" height="25"> 
+                              + det.  
+                            </button>
+                            
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Informações detalhadas do paciente</h1>
+                                    <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    ...
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                         </section>
-                        <button class="CR">CR</button> <data value="">31/12/2024 09:12H</data>
+
+                        <section class="agrupamento"><button class="CR">CR</button> <data value="">31/12/2024 09:12H</data></section>
                         <p>Estudo: Colunas</p>
                         <p>Unidade: Preven imperatriz</p>
                         
                         
                     </section>
 
-                    <!-- <section class="buttons">
-                        <button class="button-laudo"><img src="{% static 'assets/imgs/copy.svg' %}" alt=""> Duplicar exame</button>
-                        <button class="button-laudo"><img src="{% static 'assets/imgs/floppy.svg' %}" alt=""> Salvar dados do laudo</button>
-                        <button class="button-laudo"><img src="{% static 'assets/imgs/pencil-square.svg' %}" alt=""> Assinar laudo</button>
-                    </section> -->
                     <br>
 
-                    <button type="button" class=" button-modal btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Mais detalhes
-                      </button>
+                    <section class="buttons">
                       
-                      <!-- Modal -->
-                      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Informações detalhadas do paciente</h1>
-                              <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              ...
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <section class="btn-container">
+                        <button class="button-laudo-white"> 
+                          <img src="{% static 'assets/imgs/folder.svg' %}" alt="" width="25" height="25"> Preview
+                        </button>
+                      </section>
+                      <button type="button " class=" button-laudo-b border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content=" Duplicar exame" >
+                        <img class="img-btn-header" src="{% static 'assets/imgs/copy.svg' %}" alt=""  width="25 " height="25">
+                        <!-- <img class="img-btn-header" src="../static/assets/imgs/copy.svg" alt=""  width="25 " height="25"> -->
+                    </button>
+            
+                    <button type="button" class=" button-laudo-b border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Salvar dados do laudo" >
+                        <img class="img-btn-header" src="{% static 'assets/imgs/floppy.svg' %}" alt=""  width="25 " height="25">
+                        <!-- <img class="img-btn-header" src="../static/assets/imgs/floppy.svg" alt=""  width="25 " height="25"> -->
+                    </button>
+            
+                    <button type="button " class=" button-laudo-b border-0" data-bs-container="body" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Assinar laudo"  data-bs-custom-class="custom-popover" >
+                        <img class="img-btn-header" src="{% static 'assets/imgs/pencil-square.svg' %}" alt="" width="25 " height="25">
+                        <!-- <img class="img-btn-header" src="../static/assets/imgs/pencil-square.svg" alt="" width="25 " height="25"> -->
+                    </button>
+                    </section>
                 </section>
 
 
@@ -101,7 +121,8 @@
     <script>
         tinymce.init({
             selector: 'textarea',
-            width: '98%',
+            width: '100%',
+            height: '99%',
             content_style: "body { background-color: #2b3446; color: #ffffff; }",
             skin: "oxide-dark",
             content_css: "dark", 
