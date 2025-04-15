@@ -1,0 +1,67 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login ix</title>
+  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'assets/css/login.css'%}">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../static/assets/videos/video-impixel.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+    </div>
+
+    <aside class="container-blur-login hidden">
+      <img src="{% static 'assets/imgs/LOGO-Impixel2023-Principal (2).png'%}" alt="" width="">
+      <section class="container-inputs-login">
+
+        <section>
+          <div class="agrupamento-input_label">
+            <input type="email" name="email" id="email" required>
+            <label for="email">Seu email</label>
+          </div>
+          <div class="agrupamento-input_label">
+            <input type="text" name="senha" id="senha" required>
+            <label for="senha">Sua senha</label>
+          </div>
+        </section>
+        
+        <span> 
+          <a href="#">Esqueceu sua senha?</a>
+        </span>
+        
+        <button type="submit">Login</button>
+      </section>
+    </aside>
+
+  <script>
+      const myObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  if (entry.target.classList.contains('hidden-bottom')) {
+                      entry.target.classList.add('show-bottom');
+                  } else {
+                      entry.target.classList.add('show');
+                  }
+              } else {
+                  if (entry.target.classList.contains('hidden-bottom')) {
+                      entry.target.classList.remove('show-bottom');
+                  } else {
+                      entry.target.classList.remove('show');
+                  }
+              }
+          });
+      });
+
+      const elements = document.querySelectorAll('.hidden, .hidden-bottom');
+      elements.forEach((element) => myObserver.observe(element));
+  </script>
+
+</body>
+</html>

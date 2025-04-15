@@ -5,9 +5,8 @@
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/utilities/api"; */
-
-
- :root{
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+:root{
     --cor1: #a3080d;
     --cor2:#585858; 
     --cor3: #323a47;
@@ -17,11 +16,20 @@
     --cor8:#d6d6d6;
     --cor09: #2b3446;
  }
- 
+
+ :root{
+    --verde-claro: #127368;
+    --verde-neon : #002b0e;
+    --verde-escuro: #0f403c;
+    --verde-opaco: #0f2220 ;
+    --verde-cinza: #4d5959;
+    --verde-background: #011110 ;
+} 
+
  *{
     margin: 0px;
     padding: 0px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "DM Sans", serif, sans-serif !important;
 }
 
 p{
@@ -29,12 +37,14 @@ p{
 }
 
 body{
+    background-color: var(--verde-background) !important;
+}
+
+
+#body_laudario{
     background-color: var(--cor6) !important;
 }
 
-.container-center{
-    background-color: var(--cor3);
-}
 
 .header-partials{
     display: flex;
@@ -43,11 +53,10 @@ body{
     justify-content: space-between;
     width: 100%;
     padding: 10px 50px 10px 50px;
-    background-color: #1e2731 ;
 }
 
 .sub-header{
-    background-color: var(--cor3);
+    background-color: var(--verde-background);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,8 +86,8 @@ body{
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
-    background: linear-gradient(145deg, #2c3e50, #2c3a47af) !important;
-    box-shadow: 0 4px 6px rgba(100, 100, 100, 0.1), 0 6px 12px rgba(14, 14, 14, 0.692) !important;
+    background: var(--verde-escuro)!important;
+    color: var(--cor8) !important;
 }
 
 .p-email{
@@ -98,11 +107,18 @@ body{
     justify-content: space-between;
     width: 100%;
     padding: 10px 50px 10px 50px;
-    background-color: #1e2731 ;
+    background-color: #ffffff07  ;
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap !important;
+}
+
+.img-logo{
+    width: 80px ;
+    height: 60px;
 }
 
 #menuopcoes{
-    background: var(--cor3);
+    background: var(--verde-opaco);
     border: none;
     border-radius: 10px;
     margin: 10px 0px 10px 0px;
@@ -140,6 +156,7 @@ body{
     border-bottom-right-radius: 10px !important;
     border-bottom-left-radius: 10px !important;
     gap: 15px; 
+    background-color: #ffffff07  ;
 }
 
 /* Estilo barra de pesquisa */
@@ -148,14 +165,14 @@ body{
     align-items: center;
     justify-content: space-around;
 
-    height: 30px;
-    padding: 2px 5px 2px 10px;
-    background-color:#636262 ;
+    height: 36px;
+    background-color:var(--verde-cinza);
     width: 70%; 
     border-radius: 10px;
-    margin: 0px ; 
-    box-shadow: -1px -1px black;
+    margin: 0px 0px 10px 0px ; 
+    box-shadow: -2px -2px black inset;
     border: 1px solid var(--cor6);
+    padding: 10px;
 }
 
 #input-busca {
@@ -205,7 +222,7 @@ body{
 
 /* Estilo para os selects */
 .select {
-    background-color: var(--cor2);
+    background-color:var(--verde-cinza);
     color: var(--cor8);
     font-weight: bolder;
     font-size: 13px;
@@ -226,15 +243,10 @@ body{
     border-radius: 10px !important;
     padding: 0px 10px 0px 10px !important;
     height: 32px !important;
-
+    background-color: var(--verde-claro) !important;
 }
 
 /* fim menus */
-
-.table-responsive{
-    overflow-x: scroll;
-}
-
 table {
     width: 100%;
     overflow: hidden; 
@@ -249,7 +261,7 @@ td {
 }
 
 th {
-    background-color: #2d343f;
+    background-color: var(--cor6);
     color: var(--cor8) ;
     font-weight: bolder;
     padding: 10px;
@@ -337,7 +349,7 @@ tr:hover {
     border-radius: 50%;
 }
 
-/*  inicio laudario */
+/* inicio laudario */
 
 .container-main {
     display: flex;
@@ -392,13 +404,14 @@ tr:hover {
 .CR {
     background-color: transparent;
     outline: none;
-    border: 1px solid var(--cor8);
+    border: 1px solid var(--verde-claro);
     padding: 5px;
     font-size: 0.8rem;
     width: auto;
     color: var(--cor8);
     transition: 0.1s ease;
     width: 40px;
+    border-radius: 10px;
 }
 
 .CR:hover {
@@ -425,7 +438,7 @@ tr:hover {
     border: none;
     outline: none;
     transition: 0.2s ease;
-    background-color: var(--cor7);
+    background-color: var(--verde-opaco);
     border-radius: 10px;
     color: var(--cor8);
     display: flex;
@@ -462,7 +475,7 @@ ul {
 }
 
 /* Responsividade para telas menores ou iguais a 1000px */
-@media (max-width: 1000px) {
+ @media (max-width: 1000px) {
     .container-main {
         flex-direction: column;
         align-items: center;
@@ -483,7 +496,6 @@ ul {
         height: 35px;
     }
 }
-
 
 .titulo-accordion{
     text-align: center;
@@ -527,7 +539,7 @@ ul {
     border: none;
     outline: none;
     transition: 0.2s ease;
-    background-color: var(--cor1);
+    background-color: var(--verde-escuro);
     border-radius: 10px;
     color: var(--cor8);
     font-weight: 700;
@@ -544,10 +556,10 @@ ul {
     border: none;
     outline: none;
     transition: 0.2s ease;
-    background-color: #cccbcb;
+    background-color:var(--verde-escuro);
     border-radius: 10px;
-    color: var(--cor7);
-    font-weight: 700;
+    color: var(--cor8);
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -568,13 +580,13 @@ ul {
 }
 
 .modal-content {
-    background-color: var(--cor09) !important; /* Cor de fundo */
-    color:var(--cor8)!important; /* Cor do texto */
-    border-radius: 10px; /* Deixa as bordas arredondadas */
+    background-color: var(--cor09) !important; 
+    color:var(--cor8)!important; 
+    border-radius: 10px; 
 }
 
 .modal-body > h5 {
     border: none;
     height: 2px;
     background-color: var(--cor8) !important;
-}
+}  

@@ -14,4 +14,24 @@ def laudario(request):
         'laudario.html', 
     )
 
+def home(request):
+    return render(
+        request,
+        'home.html', 
+    )
+
+def login(request):
+    return render(
+        request,
+        'login.html', 
+    )
+
+def clinica(request):
+    return render(
+        request,
+        'home-clinica.html', 
+    )
+
+
+
 
